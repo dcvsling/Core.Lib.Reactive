@@ -12,5 +12,7 @@ namespace Core.Lib.Reactive
         
         public static IServiceChannel<T> FromAction<T>(Action<T> action)
             => action.ToServiceChannel();
+        public static IServiceChannel<T> From<T>()
+            => FromAction<T>(_ => { });
     }
 }
