@@ -2,19 +2,22 @@
 
 namespace Core.Lib.Reactive
 {
-    public class Service<T, TNext> : IService<T>
-    {
-        private readonly Func<T,TNext> _func;
-        private readonly IService<TNext> _output;
 
-        public Service(IService<TNext> output,Func<T,TNext> func)
+    public class Service<T> : IService<T>
+    {
+        private readonly Action<T> _action;
+        private readonly IService<T> _service;
+
+        internal Service() : this(_ => { }) { }
+        
+        public Service(Action<T> action)
         {
-            _func = func;
-            _output = output;
+            _action = action;
         }
 
-
         public void Execute(T value)
-            => _output.Execute(_func(value));
+        {
+            _action(value);
+        }
     }
 }

@@ -1,33 +1,27 @@
+﻿using Xunit;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
-using System.Collections;
-using System;
-using Xunit;
-using System.Collections.Generic;
-using Core.Lib.Reactive;
-using System.Threading.Tasks;
 
-namespace Core.Lib.Api.Tests
+namespace Core.Lib.Reactive.Tests
 {
-    public class ReactiveTests
+    public class NotifyTests
     {
         [Fact]
         async public Task Test1()
         {
+            var logwriter = new StringWriter();
             var writer = new StringWriter();
-            await Chain.FromGetter(() => this)
-                .Next(new StringConverter().ConvertToString)
-                .Next(new CountSequence().Count)
-                .Run(new Output(writer).Out);
-            Assert.Equal(this.ToString().Length.ToString(), writer.ToString());
-        }
-
-        [Fact]
-        async public Task Test2()
-        {
             var actual = string.Empty;
-            var writer = new StringWriter();
-            var input = Chain.FromAction<string>(writer.Write);
+
+            var notify = Chain.FromAction<string>(new Logger(logwriter).Log);
+
+            var input = Chain.FromAction<string>(writer.Write)
+                .ToNotify(notify);
+            
             await input.Next(new StringConverter().ConvertToString)
                 .Next(new CountSequence().Count)
                 .Run(x => actual = x.ToString());
@@ -36,13 +30,28 @@ namespace Core.Lib.Api.Tests
 
             Assert.Equal(this.ToString().Length.ToString(), actual);
             Assert.Equal(this.ToString(), writer.ToString());
+            Assert.Equal(this.ToString(), logwriter.ToString());
         }
     }
-    
+
     public class StringConverter
     {
         public String ConvertToString(object obj)
             => obj.ToString();
+    }
+
+    public class Logger
+    {
+        private readonly TextWriter _writer;
+
+        public Logger(TextWriter writer)
+        {
+            _writer = writer;
+        }
+        public void Log(object obj)
+        {
+            _writer.Write(obj);
+        }
     }
 
     public class CountSequence
