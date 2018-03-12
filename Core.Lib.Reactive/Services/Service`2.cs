@@ -2,7 +2,7 @@
 
 namespace Core.Lib.Reactive
 {
-    public class Service<T, TNext> : IService<T>
+    public class Service<T, TNext> : ServiceBase<T>,IService<T>
     {
         private readonly Func<T,TNext> _func;
         private readonly IService<TNext> _output;
@@ -15,7 +15,7 @@ namespace Core.Lib.Reactive
 
         
 
-        public void Execute(T value)
+        public override void Execute(T value)
             => _output.Execute(_func(value));
     }
 }
