@@ -8,6 +8,7 @@ namespace Core.Lib.Reactive
     {
         private int isStopped;
         private IServiceBase<T> _this;
+        
         protected ServiceBase()
         {
             _this =  this;

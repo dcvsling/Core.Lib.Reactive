@@ -12,9 +12,7 @@ namespace Core.Lib.Reactive
             _func = func;
             _output = output;
         }
-
         
-
         public override void Execute(T value)
             => _output.Execute(_func(value));
     }

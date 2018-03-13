@@ -17,10 +17,9 @@ namespace Core.Lib.Reactive.Tests
             var writer = new StringWriter();
             var actual = string.Empty;
 
-            var notify = Chain.FromAction<string>(new Logger(logwriter).Log);
+            var notify = Chain.From<object>(new Logger(logwriter).Log);
 
-            var input = Chain.FromAction<string>(writer.Write)
-                .ToNotify(notify);
+            var input = Chain.From<string>(writer.Write).RegisterNotify(notify);
             
             await input.Next(new StringConverter().ConvertToString)
                 .Next(new CountSequence().Count)
@@ -30,7 +29,7 @@ namespace Core.Lib.Reactive.Tests
 
             Assert.Equal(this.ToString().Length.ToString(), actual);
             Assert.Equal(this.ToString(), writer.ToString());
-            Assert.Equal(this.ToString(), logwriter.ToString());
+            Assert.Equal(string.Join(string.Empty,Enumerable.Repeat(this.ToString(),2)) + this.ToString().Length.ToString(), logwriter.ToString());
         }
     }
 

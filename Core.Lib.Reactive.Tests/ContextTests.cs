@@ -12,11 +12,15 @@ namespace Core.Lib.Reactive.Tests
         [Fact]
         async public Task ContextTest()
         {
-            await Chain.FromGetter(() => new WriteContext())
-                .Do(WriterHelper.WriteA)
+            var actual = string.Empty;
+            var input = Chain.From<WriteContext>();
+            await input.Do(WriterHelper.WriteA)
                 .Do(WriterHelper.WriteB)
                 .Do(WriterHelper.WriteC)
-                .Run(ctx => Assert.Equal("ABC", ctx.Writer.ToString()));
+                .Run(ctx => actual = ctx.Writer.ToString());
+            input.Execute(new WriteContext());
+
+            Assert.Equal("ABC", actual);
         }
     }
 

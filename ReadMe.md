@@ -85,3 +85,11 @@ https://www.myget.org/F/core-lib/api/v3/index.json
 ## License
 
 MIT
+
+## Release Node 
+
+
+ - 0.2.0 
+   - 新增 ServiceChannelBase 與 ServiceClientBase 來完成 Decorator 於內部可每一次都運行
+   - 新增 ServiceBase 仿照 Rx 做 Error Handling
+   - 簡化流程入口
