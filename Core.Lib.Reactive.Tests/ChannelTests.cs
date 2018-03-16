@@ -26,8 +26,8 @@ namespace Core.Lib.Api.Tests
             int actual = 0;
 
             var writer = new StringWriter();
-            var service = ((Action<string>)writer.Write).ToService();
-            var input = service.ToServiceChannel();
+            var service = ((Action<string>)writer.Write).ToChannel();
+            var input = service.ToChannel();
             var channel = input.Next(x => x.Length);
             await channel.Run(i => actual = i);
 

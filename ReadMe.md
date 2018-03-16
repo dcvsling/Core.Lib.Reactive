@@ -1,18 +1,18 @@
 # Simple Reactive
 
-[![MyGet](https://www.myget.org/BuildSource/Badge/core-lib?identifier=af0916bb-a2f1-4586-82ad-d0e6c4296d86)](https://www.myget.org/feed/core-lib/package/nuget/Core.Lib.Decorator)
+[![core-lib MyGet Build Status](https://www.myget.org/BuildSource/Badge/core-lib?identifier=869ce727-b882-4710-b8e3-5273fbfac910)](https://www.myget.org/feed/core-lib/package/nuget/Core.Lib.Decorator)
 
-�o�O Reactive Extensions ����¦�����ҫإߪ� Fluent Service Chain
+這是 Reactive Extensions 的基礎概念所建立的 Fluent Service Chain
 
-�o�ӱM�צs�b���ηN�O�Ʊ���Ǧ��M�רӭ��s�{�� Reactive Extensions �үవ�쪺�Ʊ�
+這個專案存在的用意是希望能藉此專案來重新認識 Reactive Extensions 所能做到的事情
 
 
 ## How To Use
 
 
-�ϥΤ覡�w�g�ɥi�઺�P Rx �Ϊk�ۦP, �åB�㦳 Fluent, Map, Notify���\��
+使用方式已經盡可能的與 Rx 用法相同, 並且具有 Fluent, Map, Notify的功能
 
-���O�����p�U :
+型別對應如下 :
 
 Observable => ServiceClient
 
@@ -20,9 +20,9 @@ Observer => Service
 
 Subject => ServiceChannel
 
-�󴫦W�r���ت��O���F�ư����T���� Observable ����O����
+更換名字的目的是為了排除掉固有的 Observable 的刻板概念
 
-�ϥΤ覡�p�U
+使用方式如下
 
 ```csharp
     
@@ -38,50 +38,58 @@ Subject => ServiceChannel
 
 ```
 
-��h�ϥΤ覡�i�ѦҴ��ձM��
+更多使用方式可參考測試專案
 
-## Rx�٦�����?
+## Rx還有什麼?
 
-Rx ���B�ΤF�D�`�h����N���}�o�޳N 
+Rx 其實運用了非常多的近代的開發技術 
 
-���O�������ϥ� Flient Interface �Ӧ걵��k
+像是巧妙的使用 Flient Interface 來串接方法
 
-�z�L Currying ������²�ƫD�P�B���Ƥ���D
+透過 Currying 的概念簡化非同步的棘手問題
 
-�Q�� Fluent Interface �H��²�檺�覡���� Constructor Injection Decorator
+利用 Fluent Interface 以最簡單的方式完成 Constructor Injection Decorator
 
-�� Observable �M Observer ���椬���Y�ഫ���� ���� Proxy �������ӹ�ھާ@����
+用 Observable 和 Observer 的交互關係轉換成為 類似 Proxy 的概念來實際操作物件
 
-�N�\��Ӥ��ܪ�G�i�U�ۿW�� �ŦX solid, kiss ������h 
+將功能細切至近乎可各自獨立 符合 solid, kiss 等等原則 
 
-�ӥB �]�㦳 exception handling, finally, disposable ���ڭ̱`�`��|���F��
+而且 也具有 exception handling, finally, disposable 等我們常常遺漏的東西
 
-�u�n�B�αo��, �@�˥i�H�g�X���iŪ�ʪ��{���X (ex: �� lambda ���� method)
+只要運用得當, 一樣可以寫出高可讀性的程式碼 (ex: 把 lambda 換成 method)
 
-�̭����Ӧh�ȱo�@�ݪ��F��F
+裡面有太多值得一看的東西了
 
-�o�ӱM�׶ȱN�D�n���X�ӥD�F�^���X�Ө�²�� ~~�N�O���ꪩ���N��~~
+這個專案僅將主要的幾個主幹擷取出來並簡化 ~~就是改爛版的意思~~
 
-�ӧƱ�i�H�Ǧ����ϥΪ̤F�� �o�˪��F���٥i�H�p��ϥλP�X�i
+而希望可以藉此讓使用者了解 這樣的東西還可以如何使用與擴展
 
-## ı�o����?
+## 覺得不夠?
 
-�p�G�zı�o���Ҧ�ì �Ʀ�ı�o�ܦn�� ���ڷ|��ĳ�A�i�H�i�@�B�`�O�u���� Rx
+如果您覺得有所收穫 甚至覺得很好用 那我會建議你可以進一步常是真正的 Rx
 
-�p�G�Aı�o�o������ ���O�z�ҷ��M�� �]���o�O���ꪩ �ҥH�z�����Өϥέ쥻�� Rx
+如果你覺得這很難用 那是理所當然的 因為這是改爛版 所以您更應該使用原本的 Rx
 
-�p�G�A�b�ϥΤW�����D �w��ϥ�Issue�ӵo��
+如果你在使用上有問題 歡迎使用Issue來發問
 
-�o�� project ���D�n�ت��ëD�Ʊ�j�a���ϥ� Rx
+這個 project 的主要目的並非希望大家都使用 Rx
 
-�ӬO�Ʊ�ɶq�קK�]���@�Ǧ]�����~���ЦӱN�o�˪��n�F��ư��b�`�ΩM�ǲߪ��Ҽ{���~
+而是希望盡量避免因為一些因為產品介紹而將這樣的好東西排除在常用和學習的考慮之外
 
 ## NuGet Feed
 
-���|��í�w���t�G�A�ҥH�ȮɨS���W���W��NuGet.org�A�p�G�Q�����Ѧ�Package�i�[�J�U�C NuGet Feed Url
+基於尚未穩定的緣故，所以暫時沒有規劃上到NuGet.org，如果想直接參考Package可加入下列 NuGet Feed Url
 
 https://www.myget.org/F/core-lib/api/v3/index.json
 
 ## License
 
 MIT
+
+## Release Node 
+
+
+ - 0.2.0 
+   - 新增 ServiceChannelBase 與 ServiceClientBase 來完成 Decorator 於內部可每一次都運行
+   - 新增 ServiceBase 仿照 Rx 做 Error Handling
+   - 簡化流程入口

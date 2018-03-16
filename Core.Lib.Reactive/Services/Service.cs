@@ -3,10 +3,9 @@
 namespace Core.Lib.Reactive
 {
 
-    public class Service<T> : IService<T>
+    public class Service<T> : ServiceBase<T>, IService<T>
     {
         private readonly Action<T> _action;
-        private readonly IService<T> _service;
 
         internal Service() : this(_ => { }) { }
         
@@ -15,9 +14,7 @@ namespace Core.Lib.Reactive
             _action = action;
         }
 
-        public void Execute(T value)
-        {
-            _action(value);
-        }
+        public override void Execute(T value)
+            => _action(value);
     }
 }

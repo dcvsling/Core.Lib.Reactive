@@ -15,10 +15,12 @@ namespace Core.Lib.Api.Tests
         async public Task Test1()
         {
             var writer = new StringWriter();
-            await Chain.FromGetter(() => this)
-                .Next(new StringConverter().ConvertToString)
+            var input = Chain.From<ReactiveTests>();
+            await input.Next(new StringConverter().ConvertToString)
                 .Next(new CountSequence().Count)
                 .Run(new Output(writer).Out);
+
+            input.Execute(this);
             Assert.Equal(this.ToString().Length.ToString(), writer.ToString());
         }
 
@@ -27,7 +29,7 @@ namespace Core.Lib.Api.Tests
         {
             var actual = string.Empty;
             var writer = new StringWriter();
-            var input = Chain.FromAction<string>(writer.Write);
+            var input = Chain.From<string>(writer.Write);
             await input.Next(new StringConverter().ConvertToString)
                 .Next(new CountSequence().Count)
                 .Run(x => actual = x.ToString());
